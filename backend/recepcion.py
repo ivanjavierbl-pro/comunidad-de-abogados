@@ -12,15 +12,14 @@ from __future__ import annotations
 
 from dotenv import load_dotenv
 
-from xix_agents.legal_research_agent import _require_api_key
-from xix_agents.receptionist_agent import ReceptionistAgent
+from xix_agents.receptionist_gemini import GeminiReceptionistAgent, _require_gemini_key
 
 
 def main() -> None:
     load_dotenv()
-    _require_api_key()
+    _require_gemini_key()
 
-    agent = ReceptionistAgent()
+    agent = GeminiReceptionistAgent()
 
     print("── Recepción · XIX Estudio Jurídico ──")
     print("(escribe 'salir' para terminar)\n")

@@ -16,15 +16,20 @@ nacionales) mediante búsqueda web, y devuelve la respuesta **con sus citas**.
 - Pensamiento adaptativo + esfuerzo alto
 - Respuesta en streaming (token por token)
 
-### 🛎️ Recepcionista virtual
+### 🛎️ Recepcionista virtual (motor GRATUITO)
 
 Atiende a las personas que contactan al estudio: saluda, informa horarios/áreas,
 toma los datos de contacto y **agenda citas** o **deja recados**. No brinda
 asesoría legal.
 
-- Modelo: **Claude Opus 4.8** con herramientas (tool use)
-- Agenda citas y recados guardándolos en `data/citas.json` y `data/mensajes.json`
+- Motor: **Google Gemini** (`gemini-2.5-flash`), con **nivel gratuito**
+- Herramientas (function calling): agenda citas y recados guardándolos en
+  `data/citas.json` y `data/mensajes.json`
 - Conversacional y con memoria de contexto
+- Atiende por **WhatsApp, Messenger e Instagram** (ver más abajo)
+
+> Consigue una clave gratuita en <https://aistudio.google.com/> (botón *Get API
+> key*) y colócala en `.env` como `GEMINI_API_KEY`.
 
 ## Instalación
 
@@ -52,6 +57,8 @@ python cli.py
 ```
 
 ### Recepcionista virtual (línea de comandos)
+
+Requiere `GEMINI_API_KEY` en `.env` (gratis).
 
 ```bash
 python recepcion.py

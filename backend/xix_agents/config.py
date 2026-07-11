@@ -136,3 +136,10 @@ mensaje, y comunica el código de confirmación que devuelven.
 - Confirma los datos con la persona ANTES de agendar o registrar el mensaje.
 - Sé breve, claro y amable. Haz una sola pregunta a la vez cuando falten datos.
 """
+
+
+# ====================================================================== #
+# Motor gratuito: Google Gemini (nivel gratuito de Google AI Studio)
+# ====================================================================== #
+# Modelo rápido y con nivel gratuito. Puedes cambiarlo por otro Gemini.
+GEMINI_MODEL = "gemini-2.5-flash"

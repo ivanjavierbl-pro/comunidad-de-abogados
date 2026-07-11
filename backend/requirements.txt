@@ -1,4 +1,7 @@
-# SDK oficial de Anthropic (Claude)
+# SDK de Google Gemini (motor gratuito de la recepcionista)
+google-genai>=1.0.0
+
+# SDK oficial de Anthropic (Claude) — asistente de investigación jurídica
 anthropic>=0.69.0
 
 # Servidor web para exponer el agente y el webhook de mensajería

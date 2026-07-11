@@ -24,13 +24,14 @@ from dotenv import load_dotenv
 from fastapi import BackgroundTasks, FastAPI, Request, Response
 
 from xix_agents.messaging import GraphClient
-from xix_agents.receptionist_agent import ReceptionistAgent
+from xix_agents.receptionist_gemini import GeminiReceptionistAgent
 
 load_dotenv()
 
 app = FastAPI(title="XIX Estudio Jurídico — Webhook de mensajería")
 
-agent = ReceptionistAgent()
+# Recepcionista con Google Gemini (nivel gratuito).
+agent = GeminiReceptionistAgent()
 graph = GraphClient()
 
 # Token que TÚ eliges y configuras igual en el panel de Meta para verificar el webhook.
