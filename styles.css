@@ -206,6 +206,35 @@ section h2 {
   font-size: 0.9rem;
 }
 
+.perfil h3 + p {
+  color: var(--dorado);
+  font-weight: bold;
+}
+
+.perfil-bio {
+  max-width: 560px;
+  margin: 16px auto 0;
+  line-height: 1.7;
+  font-size: 1rem !important;
+}
+
+/* ===== ÁREAS (intro) ===== */
+.areas-intro {
+  text-align: center;
+  color: var(--gris);
+  max-width: 1200px;
+  margin: -32px auto 40px;
+  font-size: 1rem;
+}
+
+/* ===== CONTACTO (datos) ===== */
+.contacto-datos {
+  text-align: center;
+  color: var(--gris);
+  margin-bottom: 32px;
+  font-size: 0.95rem;
+}
+
 /* ===== FORO ===== */
 .foro {
   background-color: var(--marfil);
@@ -298,4 +327,21 @@ footer {
   text-align: center;
   padding: 24px 40px;
   font-size: 0.9rem;
+}
+
+.redes {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.redes a {
+  color: var(--dorado);
+  font-weight: bold;
+  transition: opacity 0.2s;
+}
+
+.redes a:hover {
+  opacity: 0.8;
 }
