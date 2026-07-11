@@ -70,9 +70,8 @@ DESPACHO_INFO = {
     "telefono": "(021) 000 000",
     "areas": ["Laboral", "Civil", "Penal", "Familia", "Comercial", "Administrativo"],
     "abogados": [
-        {"nombre": "Abg. Ana García", "area": "Civil y Comercial"},
-        {"nombre": "Abg. Carlos López", "area": "Penal"},
-        {"nombre": "Abg. María Torres", "area": "Familia y Laboral"},
+        # Estudio unipersonal. Reemplaza [Tu nombre y apellido] por tu nombre real.
+        {"nombre": "Abg. [Tu nombre y apellido]", "matricula": "76.737", "area": "General"},
     ],
 }
 
@@ -83,7 +82,12 @@ RECEPTIONIST_MAX_TOKENS = 2048
 def build_receptionist_prompt(info: dict = DESPACHO_INFO) -> str:
     """Construye el prompt de sistema del recepcionista con los datos del despacho."""
     areas = ", ".join(info["areas"])
-    abogados = "; ".join(f"{a['nombre']} ({a['area']})" for a in info["abogados"])
+    abogados = "; ".join(
+        f"{a['nombre']}"
+        + (f", Matrícula N° {a['matricula']}" if a.get("matricula") else "")
+        + f" ({a['area']})"
+        for a in info["abogados"]
+    )
     return f"""\
 Eres la recepcionista virtual del {info['nombre']}, un despacho de abogados en \
 Paraguay. Atiendes a personas que escriben por primera vez.
