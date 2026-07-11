@@ -1,0 +1,9 @@
+# SDK oficial de Anthropic (Claude)
+anthropic>=0.69.0
+
+# Servidor web para exponer el agente al frontend de SUILEX
+fastapi>=0.115.0
+uvicorn[standard]>=0.32.0
+
+# Carga de variables de entorno desde .env
+python-dotenv>=1.0.0
