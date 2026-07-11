@@ -328,3 +328,20 @@ footer {
   padding: 24px 40px;
   font-size: 0.9rem;
 }
+
+.redes {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.redes a {
+  color: var(--dorado);
+  font-weight: bold;
+  transition: opacity 0.2s;
+}
+
+.redes a:hover {
+  opacity: 0.8;
+}
