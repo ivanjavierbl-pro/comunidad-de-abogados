@@ -13,7 +13,7 @@ import sys
 
 from dotenv import load_dotenv
 
-from suilex_agents.legal_research_agent import LegalResearchAgent, _require_api_key
+from xix_agents.legal_research_agent import LegalResearchAgent, _require_api_key
 
 
 def _run_query(agent: LegalResearchAgent, query: str, history):
@@ -52,7 +52,7 @@ def main() -> None:
         return
 
     # Modo interactivo.
-    print("Asistente de Investigación Jurídica de SUILEX")
+    print("Asistente de Investigación Jurídica de XIX Estudio Jurídico")
     print("Escribe tu consulta (o 'salir' para terminar).\n")
 
     history: list = []

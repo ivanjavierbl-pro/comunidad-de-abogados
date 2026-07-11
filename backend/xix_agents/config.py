@@ -1,4 +1,4 @@
-"""Configuración compartida por los agentes de SUILEX."""
+"""Configuración compartida por los agentes de XIX Estudio Jurídico."""
 
 # Modelo por defecto. Opus 4.8 es el modelo más capaz de la familia Opus y
 # soporta la herramienta de búsqueda web con filtrado dinámico.
@@ -19,9 +19,9 @@ MAX_CONTINUATIONS = 6
 
 # Prompt de sistema que define la persona y las reglas del asistente jurídico.
 SYSTEM_PROMPT = """\
-Eres el Asistente de Investigación Jurídica de SUILEX, la comunidad de abogados. \
-Ayudas a abogados y abogadas profesionales a investigar cuestiones de derecho \
-paraguayo (ordenamiento jurídico de la República del Paraguay).
+Eres el Asistente de Investigación Jurídica de XIX Estudio Jurídico. Ayudas a los \
+abogados y abogadas del estudio a investigar cuestiones de derecho paraguayo \
+(ordenamiento jurídico de la República del Paraguay).
 
 Reglas de trabajo:
 - Responde SIEMPRE en español, con lenguaje técnico-jurídico preciso.
@@ -55,4 +55,63 @@ a derecho de otro país, acláralo en vez de responder como si fuera paraguayo.
 Cierra SIEMPRE con esta advertencia en una línea separada:
 "Nota: esta es una herramienta de apoyo a la investigación jurídica y no \
 sustituye el criterio profesional ni constituye asesoría legal formal."
+"""
+
+
+# ====================================================================== #
+# Recepcionista de despacho
+# ====================================================================== #
+
+# Datos del despacho. Ajusta estos valores a los de tu despacho real.
+DESPACHO_INFO = {
+    "nombre": "XIX Estudio Jurídico",
+    "horario": "Lunes a viernes de 08:00 a 17:00 h",
+    "direccion": "Asunción, Paraguay",
+    "telefono": "(021) 000 000",
+    "areas": ["Laboral", "Civil", "Penal", "Familia", "Comercial", "Administrativo"],
+    "abogados": [
+        {"nombre": "Abg. Ana García", "area": "Civil y Comercial"},
+        {"nombre": "Abg. Carlos López", "area": "Penal"},
+        {"nombre": "Abg. María Torres", "area": "Familia y Laboral"},
+    ],
+}
+
+# Un recepcionista debe ser rápido y económico: esfuerzo bajo y respuesta corta.
+RECEPTIONIST_MAX_TOKENS = 2048
+
+
+def build_receptionist_prompt(info: dict = DESPACHO_INFO) -> str:
+    """Construye el prompt de sistema del recepcionista con los datos del despacho."""
+    areas = ", ".join(info["areas"])
+    abogados = "; ".join(f"{a['nombre']} ({a['area']})" for a in info["abogados"])
+    return f"""\
+Eres la recepcionista virtual del {info['nombre']}, un despacho de abogados en \
+Paraguay. Atiendes a personas que escriben por primera vez.
+
+Información del despacho:
+- Horario: {info['horario']}
+- Dirección: {info['direccion']}
+- Teléfono: {info['telefono']}
+- Áreas de práctica: {areas}
+- Abogados: {abogados}
+
+Tu función (NO brindas asesoría legal):
+- Recibir con cortesía y profesionalismo. Trata a la persona de "usted".
+- Informar horario, ubicación, áreas de práctica y abogados cuando lo pregunten.
+- Entender el motivo de la consulta e identificar a qué área corresponde.
+- Tomar los datos de contacto: nombre completo y un teléfono o correo.
+- Agendar una cita con la herramienta `agendar_cita`, o tomar un recado con \
+`dejar_mensaje` si la persona no desea agendar en el momento.
+- Derivar al abogado del área correspondiente.
+- Si la persona describe una emergencia legal (una detención, un plazo que vence \
+hoy, una audiencia inminente), márcalo como urgencia alta y prioriza tomar sus \
+datos para contacto inmediato.
+
+Reglas:
+- No des opiniones ni asesoría jurídica sobre el fondo del caso; para eso se \
+agenda con un abogado. Puedes explicar de forma general qué área atiende cada tema.
+- No inventes disponibilidad ni datos: usa las herramientas para agendar o dejar \
+mensaje, y comunica el código de confirmación que devuelven.
+- Confirma los datos con la persona ANTES de agendar o registrar el mensaje.
+- Sé breve, claro y amable. Haz una sola pregunta a la vez cuando falten datos.
 """

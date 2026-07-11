@@ -20,12 +20,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
-from suilex_agents.legal_research_agent import LegalResearchAgent, _require_api_key
+from xix_agents.legal_research_agent import LegalResearchAgent, _require_api_key
 
 load_dotenv()
 _require_api_key()
 
-app = FastAPI(title="SUILEX — Agentes Jurídicos")
+app = FastAPI(title="XIX Estudio Jurídico — Agentes")
 
 # Permitir que el sitio estático (index.html) consuma la API desde el navegador.
 # En producción, restringe allow_origins a tu dominio real.

@@ -1,4 +1,4 @@
-"""Asistente de Investigación Jurídica de SUILEX.
+"""Asistente de Investigación Jurídica de XIX Estudio Jurídico.
 
 Agente que responde consultas de derecho paraguayo usando Claude Opus 4.8 con la
 herramienta de búsqueda web (con citas). Verifica en fuentes oficiales de la

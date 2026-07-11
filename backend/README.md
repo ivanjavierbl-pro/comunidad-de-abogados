@@ -1,9 +1,9 @@
-# Agentes de IA de SUILEX
+# Agentes de IA de XIX Estudio Jurídico
 
-Backend en Python con agentes de inteligencia artificial (Claude) para la
-comunidad de abogados **SUILEX**.
+Backend en Python con agentes de inteligencia artificial (Claude) para
+**XIX Estudio Jurídico**, orientados al derecho paraguayo.
 
-## Agente incluido
+## Agentes incluidos
 
 ### 🔎 Asistente de Investigación Jurídica
 
@@ -15,6 +15,16 @@ nacionales) mediante búsqueda web, y devuelve la respuesta **con sus citas**.
 - Herramienta: búsqueda web con citas (`web_search_20260209`)
 - Pensamiento adaptativo + esfuerzo alto
 - Respuesta en streaming (token por token)
+
+### 🛎️ Recepcionista virtual
+
+Atiende a las personas que contactan al estudio: saluda, informa horarios/áreas,
+toma los datos de contacto y **agenda citas** o **deja recados**. No brinda
+asesoría legal.
+
+- Modelo: **Claude Opus 4.8** con herramientas (tool use)
+- Agenda citas y recados guardándolos en `data/citas.json` y `data/mensajes.json`
+- Conversacional y con memoria de contexto
 
 ## Instalación
 
@@ -31,7 +41,7 @@ Obtén tu clave en <https://console.anthropic.com/>.
 
 ## Uso
 
-### Línea de comandos
+### Investigación jurídica (línea de comandos)
 
 ```bash
 # Consulta única
@@ -41,13 +51,22 @@ python cli.py "¿Qué requisitos exige el Código del Trabajo para el despido ju
 python cli.py
 ```
 
-### Como servidor web (para integrar con el sitio de SUILEX)
+### Recepcionista virtual (línea de comandos)
+
+```bash
+python recepcion.py
+```
+
+Inicia una conversación de recepción; las citas y recados quedan guardados en
+`backend/data/`.
+
+### Como servidor web (para integrar con un sitio)
 
 ```bash
 uvicorn server:app --reload
 ```
 
-Endpoints:
+Endpoints del asistente de investigación:
 
 | Método | Ruta                     | Descripción                             |
 | ------ | ------------------------ | --------------------------------------- |
@@ -66,14 +85,17 @@ curl -X POST http://localhost:8000/api/research \
 ### Desde Python
 
 ```python
-from suilex_agents import LegalResearchAgent
+from xix_agents import LegalResearchAgent, ReceptionistAgent
 
-agent = LegalResearchAgent()
-resultado = agent.research("¿Qué garantías laborales establece el artículo 86 de la Constitución Nacional?")
-
+# Investigación jurídica
+research = LegalResearchAgent()
+resultado = research.research("¿Qué garantías laborales establece el artículo 86 de la Constitución Nacional?")
 print(resultado.answer)
-for cita in resultado.citations:
-    print(cita.title, "->", cita.url)
+
+# Recepcionista
+recepcion = ReceptionistAgent()
+texto, historial = recepcion.chat("Hola, necesito ayuda con un despido")
+print(texto)
 ```
 
 ## Estructura
@@ -82,15 +104,22 @@ for cita in resultado.citations:
 backend/
 ├── requirements.txt
 ├── .env.example
-├── cli.py                        # interfaz de línea de comandos
+├── cli.py                        # CLI del asistente de investigación
+├── recepcion.py                  # CLI de la recepcionista virtual
 ├── server.py                     # API FastAPI (JSON + SSE)
-└── suilex_agents/
+└── xix_agents/
     ├── __init__.py
-    ├── config.py                 # modelo, prompt de sistema, parámetros
-    └── legal_research_agent.py   # el agente
+    ├── config.py                 # modelo, prompts, datos del estudio
+    ├── legal_research_agent.py   # agente de investigación jurídica
+    └── receptionist_agent.py     # agente recepcionista
 ```
+
+## Configuración del estudio
+
+Los datos del estudio (nombre, horario, dirección, áreas, abogados) se editan en
+`xix_agents/config.py`, en el diccionario `DESPACHO_INFO`.
 
 ## Advertencia
 
-Esta es una herramienta de **apoyo a la investigación jurídica**. No sustituye el
-criterio profesional ni constituye asesoría legal formal.
+Estas son herramientas de **apoyo**. No sustituyen el criterio profesional ni
+constituyen asesoría legal formal.
