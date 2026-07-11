@@ -66,12 +66,18 @@ sustituye el criterio profesional ni constituye asesoría legal formal."
 DESPACHO_INFO = {
     "nombre": "XIX Estudio Jurídico",
     "horario": "Lunes a viernes de 08:00 a 17:00 h",
-    "direccion": "Asunción, Paraguay",
-    "telefono": "(021) 000 000",
-    "areas": ["Laboral", "Civil", "Penal", "Familia", "Comercial", "Administrativo"],
+    "direccion": "Calle M.O.G. c/ 1° de Marzo N° 960, La Paloma del Espíritu Santo, Paraguay",
+    "telefono": "+595 986 814404",
+    # El estudio se dedica exclusivamente al derecho civil.
+    "enfoque": "derecho civil",
+    "areas": [
+        "Contratos y obligaciones",
+        "Sucesiones",
+        "Responsabilidad civil (daños y perjuicios)",
+        "Derechos reales e inmobiliario",
+    ],
     "abogados": [
-        # Estudio unipersonal. Reemplaza [Tu nombre y apellido] por tu nombre real.
-        {"nombre": "Abg. [Tu nombre y apellido]", "matricula": "76.737", "area": "General"},
+        {"nombre": "Abg. Ivan J. Bobadilla Lombardo", "matricula": "76.737", "area": "Civil"},
     ],
 }
 
@@ -88,6 +94,11 @@ def build_receptionist_prompt(info: dict = DESPACHO_INFO) -> str:
         + f" ({a['area']})"
         for a in info["abogados"]
     )
+    enfoque_line = (
+        f"\n- Enfoque: el estudio se dedica exclusivamente al {info['enfoque']}."
+        if info.get("enfoque")
+        else ""
+    )
     return f"""\
 Eres la recepcionista virtual del {info['nombre']}, un despacho de abogados en \
 Paraguay. Atiendes a personas que escriben por primera vez.
@@ -96,7 +107,7 @@ Información del despacho:
 - Horario: {info['horario']}
 - Dirección: {info['direccion']}
 - Teléfono: {info['telefono']}
-- Áreas de práctica: {areas}
+- Áreas de práctica: {areas}{enfoque_line}
 - Abogados: {abogados}
 
 Tu función (NO brindas asesoría legal):
@@ -107,6 +118,12 @@ Tu función (NO brindas asesoría legal):
 - Agendar una cita con la herramienta `agendar_cita`, o tomar un recado con \
 `dejar_mensaje` si la persona no desea agendar en el momento.
 - Derivar al abogado del área correspondiente.
+- Si el asunto NO es de derecho civil (por ejemplo, penal, laboral o de familia), \
+aclara con cortesía que el estudio se dedica exclusivamente al derecho civil y que, \
+por eso, el propio Abg. Bobadilla se encargará personalmente de recomendarle un \
+abogado de esa rama. NO le digas que acuda a otro lado por su cuenta: toma sus \
+datos y el motivo con la herramienta `dejar_mensaje` para que el abogado lo \
+contacte y lo derive personalmente.
 - Si la persona describe una emergencia legal (una detención, un plazo que vence \
 hoy, una audiencia inminente), márcalo como urgencia alta y prioriza tomar sus \
 datos para contacto inmediato.

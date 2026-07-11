@@ -218,6 +218,15 @@ section h2 {
   font-size: 1rem !important;
 }
 
+/* ===== ÁREAS (intro) ===== */
+.areas-intro {
+  text-align: center;
+  color: var(--gris);
+  max-width: 1200px;
+  margin: -32px auto 40px;
+  font-size: 1rem;
+}
+
 /* ===== CONTACTO (datos) ===== */
 .contacto-datos {
   text-align: center;
