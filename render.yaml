@@ -1,0 +1,24 @@
+# Configuración de despliegue en Render (https://render.com).
+# Levanta el webhook de la recepcionista como servicio web 24/7.
+# Render lee este archivo automáticamente con el flujo "New → Blueprint".
+services:
+  - type: web
+    name: xix-recepcionista
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn webhook:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    envVars:
+      # Versión de Python estable (con librerías ya compiladas).
+      - key: PYTHON_VERSION
+        value: "3.12.8"
+      # Token de verificación del webhook de Meta (no es secreto).
+      - key: META_VERIFY_TOKEN
+        value: xix-verify-token
+      # Clave gratuita de Google Gemini — se ingresa en el panel de Render.
+      - key: GEMINI_API_KEY
+        sync: false
+      # Las siguientes (WhatsApp/Meta) se agregan en el panel de Render
+      # cuando conectes WhatsApp; no hacen falta para el primer despliegue.
