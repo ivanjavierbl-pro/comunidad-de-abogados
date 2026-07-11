@@ -1,8 +1,9 @@
 """Asistente de Investigación Jurídica de SUILEX.
 
-Agente que responde consultas de derecho mexicano usando Claude Opus 4.8 con la
-herramienta de búsqueda web (con citas). Verifica en fuentes oficiales (SCJN, DOF,
-leyes federales/estatales) y devuelve la respuesta junto con las fuentes citadas.
+Agente que responde consultas de derecho paraguayo usando Claude Opus 4.8 con la
+herramienta de búsqueda web (con citas). Verifica en fuentes oficiales de la
+República del Paraguay (BACN, Gaceta Oficial, Corte Suprema de Justicia, leyes
+nacionales) y devuelve la respuesta junto con las fuentes citadas.
 """
 
 from __future__ import annotations
@@ -38,13 +39,13 @@ class ResearchResult:
 
 
 class LegalResearchAgent:
-    """Agente de investigación jurídica sobre derecho mexicano.
+    """Agente de investigación jurídica sobre derecho paraguayo.
 
     Uso básico::
 
         agent = LegalResearchAgent()
-        resultado = agent.research("¿Qué establece la reforma laboral 2025 sobre "
-                                   "contratos vigentes?")
+        resultado = agent.research("¿Qué plazos de prescripción establece el "
+                                   "Código Civil paraguayo para la acción laboral?")
         print(resultado.answer)
         for cita in resultado.citations:
             print(cita.title, cita.url)

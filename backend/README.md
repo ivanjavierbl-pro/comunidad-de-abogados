@@ -7,9 +7,9 @@ comunidad de abogados **SUILEX**.
 
 ### 🔎 Asistente de Investigación Jurídica
 
-Responde consultas de **derecho mexicano** verificando en fuentes oficiales
-(SCJN, DOF, leyes federales y estatales) mediante búsqueda web, y devuelve la
-respuesta **con sus citas**.
+Responde consultas de **derecho paraguayo** verificando en fuentes oficiales de la
+República del Paraguay (BACN, Gaceta Oficial, Corte Suprema de Justicia, leyes
+nacionales) mediante búsqueda web, y devuelve la respuesta **con sus citas**.
 
 - Modelo: **Claude Opus 4.8** (`claude-opus-4-8`)
 - Herramienta: búsqueda web con citas (`web_search_20260209`)
@@ -35,7 +35,7 @@ Obtén tu clave en <https://console.anthropic.com/>.
 
 ```bash
 # Consulta única
-python cli.py "¿Cómo aplica la reforma laboral 2025 a contratos vigentes?"
+python cli.py "¿Qué requisitos exige el Código del Trabajo para el despido justificado?"
 
 # Modo interactivo (mantiene el contexto de la conversación)
 python cli.py
@@ -60,7 +60,7 @@ Ejemplo:
 ```bash
 curl -X POST http://localhost:8000/api/research \
   -H "Content-Type: application/json" \
-  -d '{"query": "¿Qué es el amparo directo y cuándo procede?"}'
+  -d '{"query": "¿Qué es la acción de inconstitucionalidad y cómo se tramita ante la Corte Suprema de Justicia?"}'
 ```
 
 ### Desde Python
@@ -69,7 +69,7 @@ curl -X POST http://localhost:8000/api/research \
 from suilex_agents import LegalResearchAgent
 
 agent = LegalResearchAgent()
-resultado = agent.research("¿Qué establece el artículo 123 constitucional?")
+resultado = agent.research("¿Qué garantías laborales establece el artículo 86 de la Constitución Nacional?")
 
 print(resultado.answer)
 for cita in resultado.citations:
