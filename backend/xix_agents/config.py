@@ -142,4 +142,4 @@ mensaje, y comunica el código de confirmación que devuelven.
 # Motor gratuito: Google Gemini (nivel gratuito de Google AI Studio)
 # ====================================================================== #
 # Modelo rápido y con nivel gratuito. Puedes cambiarlo por otro Gemini.
-GEMINI_MODEL = "gemini-2.5-flash"
+GEMINI_MODEL = "gemini-2.0-flash"
